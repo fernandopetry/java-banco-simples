@@ -30,33 +30,53 @@ public class Banco {
         poupanca.setNome("Eny Antonianca");
         poupanca.setSaldo(2000);
 
-        // EXIBINDO SALDO INICIAL CONTA CORRENTE
-        corrente.alertaSaldo();
+        // EXIBINDO SALDO INICIAL COMPLETO
+        corrente.alertaSaldoCompleto(corrente, poupanca);
 
         // MENU DE OPCOES
         int opcao = 0;
-        while (opcao != 4) {
+        while (opcao != 5) {
             // RESGATA A OPCAO DO USUARIO
             opcao = corrente.opcoesDisponiveis();
 
             switch (opcao) {
                 case 1:
                     // DEPOSITANDO VALOR
-                    corrente.depositar();
+                    corrente.depositar("Digite o valor a depositar: ");
                     // MOSTRANDO SALDO
-                    corrente.alertaSaldo();
+                    corrente.alertaSaldo("Corrente");
                     break;
                 case 2:
                     // SACANDO VALOR
-                    corrente.sacar();
+                    corrente.sacar("Digite o valor a sacar: ");
                     // MOSTRANDO SALDO
-                    corrente.alertaSaldo();
+                    corrente.alertaSaldo("Corrente");
+                    break;
+                case 3:
+                    int tipoDeTransferencia = corrente.opcoesDisponiveisTransferencia();
+
+                    if (tipoDeTransferencia == 1) {
+                        // TRANSFERENCIA DE CONTA CORRENTE PARA CONTA POUPANCA
+                        corrente.transfere(corrente, poupanca);
+                    }
+
+                    if (tipoDeTransferencia == 2) {
+                        // TRANSFERENCIA DE CONTA POUPANCA PARA CONTA CORRENTE
+                        corrente.transfere(poupanca, corrente);
+                    }
+
+                    // MOSTRANDO SALDO COMPLETO
+                    corrente.alertaSaldoCompleto(corrente, poupanca);
+                    break;
+                case 4:
+                    // MOSTRANDO SALDO COMPLETO
+                    corrente.alertaSaldoCompleto(corrente, poupanca);
                     break;
             }
 
         } //END WHILE
 
-        JOptionPane.showMessageDialog(null,"Fim");
+        JOptionPane.showMessageDialog(null, "Obrigado por acessar nosso sistema.");
     }
 
 }
