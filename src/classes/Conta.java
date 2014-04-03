@@ -38,9 +38,11 @@ public class Conta {
      */
     public boolean sacarTransparente(double valorSacar) {
         if (valorSacar > this.cliente.getSaldo()) {
-            JOptionPane.showMessageDialog(null, "\nOperação não efetuada conta com saldo insuficiente\n");
+            JOptionPane.showMessageDialog(null, "\nOperação não efetuada, conta com saldo insuficiente\n");
             return false;
         } else {
+//            double saldoModificado = (this.cliente.getSaldo()-valorSacar);
+//            this.cliente.setSaldo(saldoModificado);
             this.cliente.setSaldo(this.cliente.getSaldo()-valorSacar);
             return true;
         } 
@@ -67,9 +69,9 @@ public class Conta {
     }
 
     /**
-     * Método responsável em fazer a transferencia entre contas
-     * @param origem Instancia do cliente origem para a transferencia
-     * @param destino Instancia do cliente de destino para a transferencia
+     * Método transferencia de valor
+     * @param origem Instancia da classe conta, sendo a conta de origem da transferencia
+     * @param destino Instancia da classe conta, sendo a conta que recebe a transferencia
      */
     public void transfere(Conta origem, Conta destino) {
         double valorDeTransferencia = this.resgataValor("Digite o valor a transferir");
@@ -114,7 +116,7 @@ public class Conta {
                 "Conta Corrente nº: " + corrente.cliente.getNumero()
                 + "\n Nome: " + corrente.cliente.getNome()
                 + " \n Saldo Atual: R$ " + corrente.cliente.getSaldo()
-                + " \n \nConta Popanca nº: " + poupanca.cliente.getNumero()
+                + " \n \nConta Poupanca nº: " + poupanca.cliente.getNumero()
                 + "\n Nome: " + poupanca.cliente.getNome()
                 + " \n Saldo Atual: R$ " + poupanca.cliente.getSaldo()
         );
@@ -155,8 +157,8 @@ public class Conta {
 
             String num = JOptionPane.showInputDialog(
                     "Digite a opçao:"
-                    + "\n 1 - Transferir de corrente para poupanca"
-                    + "\n 2 - Transferir de poupanca para corrente");
+                    + "\n 1 - Transferir de corrente => poupanca"
+                    + "\n 2 - Transferir de poupanca => corrente");
             opcao = Integer.parseInt(num);
 
             if (opcao > 2 || opcao < 1) {
